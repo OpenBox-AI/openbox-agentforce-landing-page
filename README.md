@@ -4,14 +4,20 @@ An [EmDash](https://emdashcms.com) (Astro + Node + SQLite) site. Every section o
 
 ## Run locally
 
+Two configs share the same code:
+
+| Command | Runtime | Data |
+| --- | --- | --- |
+| `npm run dev:node` | Node + local SQLite (`data.db`) | Quickest local preview |
+| `npm run dev` | Cloudflare Workers runtime (workerd) | Local D1 state in `.wrangler/` — matches production |
+
 ```bash
 npm install
-npm run dev          # http://localhost:4321  (runs in the background; `npx astro dev stop` to stop)
+npm run dev:node     # http://localhost:4321 (runs in the background; `npx astro dev stop` to stop)
 ```
 
-- Site: http://localhost:4321/
 - Admin: http://localhost:4321/_emdash/admin/ (first visit starts the setup wizard where you register your own passkey)
-- Re-apply the starter content (does not touch your edits unless you pass `--on-conflict=update`):
+- Load the starter content into the local SQLite database (Node mode):
 
 ```bash
 npx emdash seed seed/seed.json
@@ -40,7 +46,22 @@ npx emdash seed seed/seed.json
 
 Design source: Figma file “OpenBox for Agentforce — Landing Page”.
 
-## Deployment
+## Deployment (Cloudflare Workers + D1 + R2)
 
-Not deployed. Review locally first. See the EmDash docs for Node.js / Cloudflare deployment, and back up
-`EMDASH_ENCRYPTION_KEY` (in `.env`, never committed) before deploying.
+`astro.config.mjs` and `wrangler.jsonc` target Cloudflare Workers. Build `npm run build`, deploy `npx wrangler deploy`.
+
+1. `npx wrangler login`
+2. Generate and set the encryption key (back it up separately — it is not stored in the database):
+   ```bash
+   npx emdash secrets generate
+   npx wrangler secret put EMDASH_ENCRYPTION_KEY
+   ```
+3. Set `EMDASH_SITE_URL` to the production origin **before** first setup (passkeys are bound to it).
+4. Connect the repo in Cloudflare (Workers Builds): build command `npm run build`, deploy command `npx wrangler deploy`.
+   The D1 database (`DB`), R2 bucket (`MEDIA`) and session KV are created on the first deploy.
+5. Open `/_emdash/admin`, register a passkey, and **tick “Include sample content”** in the setup wizard —
+   the schema applies automatically, the home page content only loads if you choose it.
+6. New sites start in staging (hidden from search engines) until taken live in the admin.
+
+Notes: the Worker bundle is ~19 MB (≈5 MB gzipped), which needs a Workers **Paid** plan. Edits made in production live in D1, not in git.
+The Node config (`astro.config.node.mjs`, `npm run build:node` / `start:node`) is kept for local preview and self-hosting.

@@ -1,14 +1,15 @@
-import node from "@astrojs/node";
+// Production config: Cloudflare Workers + D1 (database) + R2 (media).
+// For a local SQLite preview (or self-hosting on Node) use astro.config.node.mjs:
+//   npm run dev:node / npm run build:node
+import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
+import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig, fontProviders } from "astro/config";
-import emdash, { local } from "emdash/astro";
-import { sqlite } from "emdash/db";
+import emdash from "emdash/astro";
 
 export default defineConfig({
 	output: "server",
-	adapter: node({
-		mode: "standalone",
-	}),
+	adapter: cloudflare(),
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
@@ -16,11 +17,8 @@ export default defineConfig({
 	integrations: [
 		react(),
 		emdash({
-			database: sqlite({ url: "file:./data.db" }),
-			storage: local({
-				directory: "./uploads",
-				baseUrl: "/_emdash/api/media/file",
-			}),
+			database: d1({ binding: "DB", session: "auto", coalesce: true }),
+			storage: r2({ binding: "MEDIA" }),
 		}),
 	],
 	fonts: [

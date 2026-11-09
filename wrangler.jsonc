@@ -1,0 +1,24 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "openbox-agentforce-landing-page",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	// D1 database and R2 bucket are created on the first `wrangler deploy` if they don't exist.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "openbox-agentforce-landing-page",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "openbox-agentforce-media",
+		},
+	],
+	// Cron trigger drives scheduled publishing and maintenance.
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+}

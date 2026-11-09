@@ -10,3 +10,8 @@ data.db-*
 .env
 .env.*
 !.env.example
+
+# Cloudflare
+.wrangler
+.dev.vars
+.dev.vars.*
