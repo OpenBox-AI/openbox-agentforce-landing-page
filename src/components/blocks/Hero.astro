@@ -1,0 +1,68 @@
+---
+import { sanitizeHref } from "emdash";
+import Icon from "../Icon.astro";
+import Verdict from "../Verdict.astro";
+
+const { value: v } = Astro.props;
+const headline: string = v.headline ?? "";
+const hl: string = v.highlight ?? "";
+const at = hl ? headline.indexOf(hl) : -1;
+const before = at >= 0 ? headline.slice(0, at) : headline;
+const mark = at >= 0 ? hl : "";
+const after = at >= 0 ? headline.slice(at + hl.length) : "";
+const primary = v.primary_cta_label && v.primary_cta_url ? { label: v.primary_cta_label, url: sanitizeHref(v.primary_cta_url) } : null;
+const secondary = v.secondary_cta_label && v.secondary_cta_url ? { label: v.secondary_cta_label, url: sanitizeHref(v.secondary_cta_url) } : null;
+const note: string = v.audience_note ?? "";
+const bold: string = v.audience_bold ?? "";
+const nAt = bold ? note.indexOf(bold) : -1;
+const block = v.sim_block_above ?? 40;
+const approval = v.sim_approval_above ?? 25;
+const constrain = v.sim_constrain_above ?? 15;
+const halt = v.sim_halt_at ?? 90;
+const start = v.sim_default ?? 45;
+const checks = (v.checks ?? []).map((c: any) => c.text).filter(Boolean);
+---
+
+<section class="hero" id={v.anchor_id || undefined}>
+	<div class="wrap hero__grid">
+		<div class="hero__copy">
+			{v.badge && <span class="badge">{v.badge}</span>}
+			<h1>{before}{mark && <span class="hl">{mark}</span>}{after}</h1>
+			{v.lede && <p class="lead">{v.lede}</p>}
+			{(primary || secondary) && (
+				<div class="actions">
+					{primary && <a class="btn btn--primary" href={primary.url}>{primary.label}<Icon name="arrow-right" /></a>}
+					{secondary && <a class="btn btn--secondary" href={secondary.url}><Icon name="play-circle" />{secondary.label}</a>}
+				</div>
+			)}
+			{checks.length > 0 && (
+				<ul class="checks">{checks.map((t: string) => <li><Icon name="check" />{t}</li>)}</ul>
+			)}
+			{note && (
+				<p class="audience"><Icon name="users" /><span>{nAt >= 0 ? <>{note.slice(0, nAt)}<b>{bold}</b>{note.slice(nAt + bold.length)}</> : note}</span></p>
+			)}
+		</div>
+
+		<div class="sim" data-sim data-block={block} data-approval={approval} data-constrain={constrain} data-halt={halt} aria-label="Live policy decision simulator">
+			<div class="sim__bar"><i></i><i></i><i></i><span>openbox · policy sandbox</span><em>LIVE</em></div>
+			<div class="sim__body">
+				<p class="sim__req">An Agentforce sales agent proposes: <b data-sim-req>discount {start}% on an opportunity</b></p>
+				<div>
+					<div class="sim__row"><label for="simRange">Requested discount</label><span class="sim__val" data-sim-val>{start}%</span></div>
+					<input id="simRange" type="range" min="0" max="100" value={start} step="1" aria-describedby="simReason" data-sim-range style={`--pct:${start}%`} />
+					<div class="sim__scale" aria-hidden="true"><span>0%</span><span>{constrain}</span><span>{approval}</span><span>{block}</span><span>{halt}%</span></div>
+				</div>
+				<p class="sim__hint"><Icon name="arrow-left" />Drag the slider — watch OpenBox decide, live</p>
+				<div class="sim__rating">
+					<button class="seg" type="button" aria-pressed="true" data-sim-rating="warm">Account: Warm</button>
+					<button class="seg" type="button" aria-pressed="false" data-sim-rating="cold">Account: Cold</button>
+				</div>
+				<div class="sim__out" aria-live="polite">
+					<span data-sim-chip><Verdict verdict="BLOCK" /></span>
+					<p class="sim__reason" id="simReason" data-sim-reason><b>Blocked.</b> {start}% is over the {block}% ceiling. Nothing is written, and the agent explains why.</p>
+					<p class="sim__rule" data-sim-rule>rule · discount &gt; {block}% → BLOCK</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

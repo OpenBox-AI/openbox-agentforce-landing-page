@@ -1,0 +1,83 @@
+---
+import { getMenuWithCacheHint, getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+import "../styles/landing.css";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	/** Pass content reference for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+	headerCtaLabel?: string | null;
+	headerCtaUrl?: string | null;
+	launchpad?: string | null;
+	footerNote?: string | null;
+}
+
+const { title, pageTitle, description, image, canonical, content, headerCtaLabel, headerCtaUrl, launchpad, footerNote } =
+	Astro.props;
+const [settingsResult, primary, footer, legal] = await Promise.all([
+	getSiteSettingsWithCacheHint(),
+	getMenuWithCacheHint("primary"),
+	getMenuWithCacheHint("footer"),
+	getMenuWithCacheHint("legal"),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(settingsResult.cacheHint);
+	Astro.cache.set(primary.cacheHint);
+	Astro.cache.set(footer.cacheHint);
+	Astro.cache.set(legal.cacheHint);
+}
+
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(settingsResult.data);
+const titleIncludesSiteName =
+	title === siteTitle || title.endsWith(` | ${siteTitle}`) || title.endsWith(` — ${siteTitle}`);
+const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
+const pageDescription = description ?? siteTagline;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description: pageDescription,
+	canonical,
+	image,
+	content,
+	siteName: siteTitle,
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+
+		<SiteHeader items={primary.data?.items ?? []} ctaLabel={headerCtaLabel} ctaUrl={headerCtaUrl} launchpad={launchpad} />
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<SiteFooter links={footer.data?.items ?? []} legal={legal.data?.items ?? []} note={footerNote} launchpad={launchpad} />
+
+		<EmDashBodyEnd page={pageCtx} />
+		<script>
+			import "../scripts/landing.ts";
+		</script>
+	</body>
+</html>

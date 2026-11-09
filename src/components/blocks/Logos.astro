@@ -1,0 +1,17 @@
+---
+import { Image } from "emdash/ui";
+const { value: v } = Astro.props;
+const logos = v.logos ?? [];
+---
+
+<section class="band" style="padding-block: 0 40px" id={v.anchor_id || undefined}>
+	<div class="wrap">
+		{v.heading && <p class="eyebrow" style="color: var(--ink-3)">{v.heading}</p>}
+		<div class="logos">
+			{logos.map((l: any) => (
+				<div class="logo-slot">{l.image ? <Image image={l.image} /> : l.name || "Partner logo"}</div>
+			))}
+		</div>
+		{v.note && <p class="note">{v.note}</p>}
+	</div>
+</section>

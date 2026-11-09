@@ -1,0 +1,38 @@
+---
+import Icon from "../Icon.astro";
+import Verdict from "../Verdict.astro";
+const { value: v } = Astro.props;
+const steps = v.steps ?? [];
+---
+
+<section class="band" id={v.anchor_id || undefined}>
+	<div class="wrap">
+		<div class="head" style="margin-bottom: 40px">
+			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+			<h2 class="h2">{v.heading}</h2>
+			{v.text && <p class="lead">{v.text}</p>}
+		</div>
+		<ol class="flow" style="list-style:none;padding:0;margin:0">
+			{steps.map((s: any, i: number) => (
+				<li class:list={["step", { "step--gate": s.checkpoint }]}>
+					<div class="step__rail">
+						<span class="step__node"><Icon name={s.icon || "check"} /></span>
+						<span class="step__line"></span>
+						{s.checkpoint && <span class="step__chip"><Verdict verdict="ALLOW" small /></span>}
+						{s.checkpoint && <span class="step__line step__line2"></span>}
+						<Icon name="chevron-right" class="step__arrow" />
+					</div>
+					<div class="step__txt">
+						<span class="step__lbl">Step {String(i + 1).padStart(2, "0")}{s.checkpoint && <span class="step__gatepill">Checkpoint</span>}</span>
+						<h3>{s.title}</h3>
+						<p>{s.text}</p>
+						{s.checkpoint && <span class="step__allow"><Verdict verdict="ALLOW" small /> passes to the next step</span>}
+					</div>
+				</li>
+			))}
+		</ol>
+		{(v.note_lead || v.note_text) && (
+			<p class="failnote"><Icon name="shield-tick" /><span><b>{v.note_lead}</b> {v.note_text}</span></p>
+		)}
+	</div>
+</section>

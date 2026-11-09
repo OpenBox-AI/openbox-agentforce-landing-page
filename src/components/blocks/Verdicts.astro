@@ -1,0 +1,63 @@
+---
+import Verdict from "../Verdict.astro";
+const { value: v } = Astro.props;
+const verdicts = v.verdicts ?? [];
+const COLOR: Record<string, string> = { ALLOW: "#14b8a6", CONSTRAIN: "#008cff", "REQUIRE APPROVAL": "#d97706", BLOCK: "#dc2626", HALT: "#b91c1c" };
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const VCLS: Record<string, string> = { BLOCK: "v-block", REQUIRE_APPROVAL: "v-approval", CONSTRAIN: "v-constrain", ALLOW: "v-allow" };
+function highlight(line: string) {
+	if (line.trim().startsWith("#")) return `<span class="cm">${esc(line)}</span>`;
+	let out = esc(line);
+	out = out.replace(/\s+#.*$/, (m) => `<span class="cm">${m}</span>`);
+	out = out.replace(/^(\s*)(action|if|else)\b/, '$1<span class="kw">$2</span>');
+	out = out.replace(/\b(REQUIRE_APPROVAL|CONSTRAIN|BLOCK|ALLOW)\b/g, (m) => `<span class="${VCLS[m]}">${m}</span>`);
+	return out;
+}
+const codeHtml = (v.code ?? "").split("\n").map(highlight).join("\n");
+const steps = v.example_steps ?? [];
+---
+
+<section class="band band--alt" id={v.anchor_id || undefined}>
+	<div class="wrap">
+		<div class="head">
+			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+			<h2 class="h2">{v.heading}</h2>
+			{v.text && <p class="lead">{v.text}</p>}
+		</div>
+		<div class="ladder__axis" aria-hidden="true">LESS CONTROL<i></i><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>MORE CONTROL</div>
+		<p class="ladder__cap" aria-hidden="true">LESS CONTROL → MORE CONTROL</p>
+		<ol class="ladder">
+			{verdicts.map((d: any, i: number) => (
+				<li class="rung" style={`--c:${COLOR[(d.verdict ?? "").toUpperCase()] ?? "#008cff"}`}>
+					<span class="rung__bar"></span>
+					<div class="rung__body">
+						<div class="rung__head"><span class="rung__no">{String(i + 1).padStart(2, "0")}</span><Verdict verdict={d.verdict} /></div>
+						<p>{d.description}</p>
+					</div>
+				</li>
+			))}
+		</ol>
+
+		<div class="example">
+			<div class="example__head">
+				{v.example_eyebrow && <span class="eyebrow">{v.example_eyebrow}</span>}
+				<h3>{v.example_title}</h3>
+				{v.example_text && <p class="lead" style="font-size:16px">{v.example_text}</p>}
+			</div>
+			<div class="example__grid">
+				<ol class="example__list">
+					{steps.map((s: any) => {
+						const t: string = s.text ?? "";
+						const b: string = s.bold ?? "";
+						const at = b ? t.indexOf(b) : -1;
+						return <li><span>{at >= 0 ? <>{t.slice(0, at)}<b>{b}</b>{t.slice(at + b.length)}</> : t}</span></li>;
+					})}
+				</ol>
+				<div>
+					<pre class="code" aria-label="Policy code" set:html={codeHtml}></pre>
+					{(v.footnote_lead || v.footnote_text) && <p class="example__foot"><b>{v.footnote_lead}</b> {v.footnote_text}</p>}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,51 @@
+---
+import { sanitizeHref } from "emdash";
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+
+interface Item {
+	label: string;
+	url: string;
+	target?: string;
+}
+interface Props {
+	items: Item[];
+	ctaLabel?: string | null;
+	ctaUrl?: string | null;
+	launchpad?: string | null;
+}
+const { items, ctaLabel, ctaUrl, launchpad } = Astro.props;
+const cta = ctaLabel && ctaUrl ? { label: ctaLabel, url: sanitizeHref(ctaUrl) } : null;
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+	<div class="wrap nav__in">
+		<a href="/" class="nav__logo" aria-label="OpenBox home"><Logo /></a>
+		<nav class="nav__links" aria-label="Primary">
+			{items.map((i) => <a href={i.url}>{i.label}</a>)}
+		</nav>
+		<div class="nav__right">
+			{launchpad && <span class="pill"><Icon name="cloud" />{launchpad}</span>}
+			{cta && <a class="btn btn--primary nav__cta" href={cta.url}>{cta.label}<Icon name="arrow-right" /></a>}
+			<button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-menu-btn>
+				<Icon name="menu" class="menu-open" /><Icon name="x" class="menu-close" />
+			</button>
+		</div>
+	</div>
+	<div class="drawer" id="drawer" data-drawer>
+		<nav aria-label="Mobile">
+			{items.map((i) => <a class="drawer__link" href={i.url}>{i.label}</a>)}
+		</nav>
+		<div class="drawer__foot">
+			{launchpad && <span class="pill"><Icon name="cloud" />{launchpad}</span>}
+			{cta && <a class="btn btn--primary btn--block" href={cta.url}>{cta.label}<Icon name="arrow-right" /></a>}
+		</div>
+	</div>
+</header>
+
+<style>
+	.menu-btn :global(.menu-close) { display: none; }
+	.menu-btn[aria-expanded="true"] :global(.menu-open) { display: none; }
+	.menu-btn[aria-expanded="true"] :global(.menu-close) { display: block; }
+</style>

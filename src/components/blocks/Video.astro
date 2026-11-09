@@ -1,0 +1,33 @@
+---
+import { sanitizeHref } from "emdash";
+import Icon from "../Icon.astro";
+const { value: v } = Astro.props;
+const url: string | undefined = v.video_url ? sanitizeHref(v.video_url) : undefined;
+const isFile = !!url && /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
+const transcript = v.transcript_url ? sanitizeHref(v.transcript_url) : undefined;
+---
+
+<section class="band" style="padding-block: 6px 40px" id={v.anchor_id || undefined}>
+	<div class="wrap video">
+		<div class="head head--center" style="margin-bottom:0">
+			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+			<h2 class="h2">{v.heading}</h2>
+			{v.text && <p class="lead">{v.text}</p>}
+		</div>
+		<div class:list={["video__frame", { "video__frame--live": !!url }]}>
+			{url && isFile && <video controls preload="metadata" src={url}></video>}
+			{url && !isFile && <iframe src={url} title={v.heading} allow="fullscreen; picture-in-picture" loading="lazy"></iframe>}
+			{!url && (
+				<>
+					<span class="play" role="img" aria-label="Play demo video"><Icon name="play" /></span>
+					<span class="video__ph">16:9 demo video goes here</span>
+					<span class="video__sub">Placeholder — add the video URL in the admin (block: Video)</span>
+				</>
+			)}
+			{v.duration && <span class="video__dur">{v.duration}</span>}
+		</div>
+		{(v.caption || transcript) && (
+			<p class="video__cap">{v.caption} {transcript && <a href={transcript}>{v.transcript_label || "Read the transcript"} →</a>}</p>
+		)}
+	</div>
+</section>

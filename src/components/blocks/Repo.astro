@@ -1,0 +1,62 @@
+---
+import { sanitizeHref } from "emdash";
+import Icon from "../Icon.astro";
+import Logo from "../Logo.astro";
+const { value: v } = Astro.props;
+const lines = (s?: string) => (s ?? "").split("\n").map((x) => x.trim()).filter(Boolean);
+const COLORS: Record<string, string> = { green: "#0f766e", blue: "#0070cc", gray: "#375582", navy: "#003866" };
+const gh = v.github_url ? sanitizeHref(v.github_url) : "#";
+const docs = v.docs_url ? sanitizeHref(v.docs_url) : "#";
+const readmeLink = v.readme_link_url ? sanitizeHref(v.readme_link_url) : gh;
+const path: string = v.readme_path ?? "";
+const [pathName, pathFile] = path.includes(" / ") ? path.split(" / ") : [path, ""];
+const escape = (l: string) => l.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const code = (v.readme_quickstart ?? "")
+	.split("\n")
+	.map((l: string) =>
+		l.trim().startsWith("#")
+			? `<span class="cm">${escape(l)}</span>`
+			: escape(l).replace(/(\s)(--?[a-zA-Z][\w-]*)/g, '$1<span class="pr">$2</span>'),
+	)
+	.join("\n");
+---
+
+<section class="band" style="padding-top: 8px" id={v.anchor_id || undefined}>
+	<div class="wrap">
+		<div class="repo">
+			<div class="repo__copy">
+				{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+				<h2 class="h2">{v.heading}</h2>
+				{v.text && <p class="lead">{v.text}</p>}
+				<ul class="repo__checks">{(v.checks ?? []).map((c: any) => <li><Icon name="check" />{c.text}</li>)}</ul>
+				<div class="actions" style="padding-top:8px">
+					<a class="btn btn--light" href={gh} target="_blank" rel="noopener"><Icon name="github" />{v.github_label || "View the repo on GitHub"}</a>
+					<a class="btn btn--ghost" href={docs} target="_blank" rel="noopener">{v.docs_label || "Read the docs"}</a>
+				</div>
+				{v.clone_command && (
+					<div class="clone"><span>{v.clone_command}</span><button type="button" data-copy={v.clone_command}>Copy</button></div>
+				)}
+			</div>
+
+			<div class="readme">
+				<div class="readme__top">
+					<Icon name="file" />
+					<span class="readme__path">{pathName}{pathFile && <span> / {pathFile}</span>}</span>
+					{v.stars && <span class="readme__star"><Icon name="star" />{v.stars}</span>}
+				</div>
+				<div class="readme__body" tabindex="0" role="region" aria-label="README preview (scrollable)">
+					<span class="oblogo"><Logo /></span>
+					<p>{v.readme_tagline}</p>
+					<div class="badges">{(v.badges ?? []).map((b: any) => <span class="bdg" style={`--c:${COLORS[b.color] ?? COLORS.blue}`}><i>{b.label}</i><b>{b.value}</b></span>)}</div>
+					<p>{v.readme_intro}</p>
+					{v.readme_prereq && <><h3>Prerequisites</h3><ul>{lines(v.readme_prereq).map((l) => <li>{l}</li>)}</ul></>}
+					{v.readme_quickstart && <><h3>Quickstart</h3><pre class="rcode" set:html={code}></pre></>}
+					{v.readme_after && <p>{v.readme_after}</p>}
+					{v.readme_inside && <><h3>What’s inside</h3><ul>{lines(v.readme_inside).map((l) => <li>{l}</li>)}</ul></>}
+					{v.readme_why && <><h3>Why this exists</h3><p>{v.readme_why}</p></>}
+				</div>
+				<div class="readme__foot"><a href={readmeLink} target="_blank" rel="noopener">{v.readme_link_label || "Read the full README on GitHub"} →</a></div>
+			</div>
+		</div>
+	</div>
+</section>

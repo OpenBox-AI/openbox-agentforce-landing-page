@@ -1,0 +1,90 @@
+---
+import Icon from "../Icon.astro";
+import Verdict from "../Verdict.astro";
+const { value: v } = Astro.props;
+const slides = [
+	{ title: v.slide1_title, sub: v.slide1_sub, url: v.slide1_url, tab: v.slide1_tab },
+	{ title: v.slide2_title, sub: v.slide2_sub, url: v.slide2_url, tab: v.slide2_tab },
+	{ title: v.slide3_title, sub: v.slide3_sub, url: v.slide3_url, tab: v.slide3_tab },
+	{ title: v.slide4_title, sub: v.slide4_sub, url: v.slide4_url, tab: v.slide4_tab },
+];
+const caption = (txt?: string, mono?: string) => {
+	const t = txt ?? "";
+	const at = mono ? t.indexOf(mono) : -1;
+	return at >= 0 ? [t.slice(0, at), mono, t.slice(at + (mono as string).length)] : [t, "", ""];
+};
+const c1 = caption(v.slide1_caption, v.slide1_caption_mono);
+---
+
+<section class="band" id={v.anchor_id || undefined}>
+	<div class="wrap" data-demo data-autoplay-ms="5000">
+		<div class="head">
+			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+			<h2 class="h2">{v.heading}</h2>
+			{v.text && <p class="lead">{v.text}</p>}
+		</div>
+
+		<div class="show__head">
+			<div>
+				<span class="show__n" data-demo-n>01 / 04</span>
+				<div class="show__title" data-demo-title>{slides[0].title}</div>
+				<p class="show__sub" data-demo-sub>{slides[0].sub}</p>
+			</div>
+			<div class="show__nav">
+				<button type="button" aria-label="Previous step" data-demo-prev><Icon name="arrow-left" /></button>
+				<button type="button" aria-label="Pause autoplay" data-demo-play><Icon name="pause" /></button>
+				<button type="button" aria-label="Next step" data-demo-next><Icon name="arrow-right" /></button>
+			</div>
+		</div>
+		<div class="show__bar" aria-hidden="true"><span data-demo-bar></span></div>
+
+		<div class="stage" aria-live="polite">
+			<div class="stage__bar"><i></i><i></i><i></i><span class="stage__url" data-demo-url>{slides[0].url}</span></div>
+
+			<div class="slide" data-slide data-title={slides[0].title} data-sub={slides[0].sub} data-url={slides[0].url}>
+				{(v.rules ?? []).map((r: any, i: number) => (
+					<div class="rule"><span class="rule__ord">{i + 1}</span><span>{r.text}</span><Verdict verdict={r.verdict} small /><span class="tog" aria-hidden="true"></span></div>
+				))}
+				<p class="cap"><Icon name="alert" /><span>{c1[0]}{c1[1] && <code>{c1[1]}</code>}{c1[2]}</span></p>
+			</div>
+
+			<div class="slide" data-slide hidden data-title={slides[1].title} data-sub={slides[1].sub} data-url={slides[1].url}>
+				<div class="chat">
+					{(v.messages ?? []).map((m: any) => (
+						<div class:list={["msg", m.from === "user" ? "msg--user" : "msg--agent"]}>
+							{m.verdict && <Verdict verdict={m.verdict} small />}
+							<span>{m.text}</span>
+						</div>
+					))}
+				</div>
+				<p class="cap" style="margin-top:18px"><Icon name="alert" /><span>{v.slide2_caption}</span></p>
+			</div>
+
+			<div class="slide" data-slide hidden data-title={slides[2].title} data-sub={slides[2].sub} data-url={slides[2].url}>
+				<div class="record">
+					{(v.record ?? []).map((f: any) => (
+						<div class:list={["field", { "field--hl": f.highlight }]}>
+							<div class="k">{f.label}</div>
+							<div class="v">{f.old_value && <s>{f.old_value}</s>}{f.value}</div>
+						</div>
+					))}
+				</div>
+				<p class="cap" style="margin-top:18px"><Icon name="verified" /><span>{v.slide3_caption}</span></p>
+			</div>
+
+			<div class="slide" data-slide hidden data-title={slides[3].title} data-sub={slides[3].sub} data-url={slides[3].url}>
+				{(v.issues ?? []).map((i: any) => (
+					<div class="issue"><span class="pv">policy_violation</span><div><h4>{i.title}</h4><p>{i.meta}</p></div></div>
+				))}
+				<p class="cap"><Icon name="verified" /><span>{v.slide4_caption}</span></p>
+			</div>
+		</div>
+
+		<div class="tabs" role="tablist" aria-label="Demo steps">
+			{slides.map((s, i) => (
+				<button type="button" role="tab" aria-selected={i === 0 ? "true" : "false"} data-demo-tab={i}><span class="t-long">{String(i + 1).padStart(2, "0")} · {s.title}</span><span class="t-short">{s.tab || s.title}</span></button>
+			))}
+		</div>
+		{v.autoplay_note && <p class="autonote">{v.autoplay_note}</p>}
+	</div>
+</section>

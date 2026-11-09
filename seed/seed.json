@@ -1,0 +1,1698 @@
+{
+ "$schema": "https://emdashcms.com/seed.schema.json",
+ "version": "1",
+ "meta": {
+  "name": "OpenBox for Agentforce",
+  "description": "Landing page for OpenBox governance of Salesforce Agentforce",
+  "author": "OpenBox"
+ },
+ "settings": {
+  "title": "OpenBox for Agentforce",
+  "tagline": "Agentforce agents that can’t be talked out of your rules."
+ },
+ "blockTypes": [
+  {
+   "slug": "agf_hero",
+   "label": "Hero + simulator",
+   "description": "Headline, calls to action and the live policy simulator",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "badge",
+       "label": "Badge",
+       "type": "string"
+      },
+      {
+       "slug": "headline",
+       "label": "Headline",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "highlight",
+       "label": "Words to highlight in blue (must appear in the headline)",
+       "type": "string"
+      },
+      {
+       "slug": "lede",
+       "label": "Lede",
+       "type": "text"
+      },
+      {
+       "slug": "primary_cta_label",
+       "label": "Primary button text",
+       "type": "string"
+      },
+      {
+       "slug": "primary_cta_url",
+       "label": "Primary button link",
+       "type": "string"
+      },
+      {
+       "slug": "secondary_cta_label",
+       "label": "Secondary button text",
+       "type": "string"
+      },
+      {
+       "slug": "secondary_cta_url",
+       "label": "Secondary button link",
+       "type": "string"
+      },
+      {
+       "slug": "checks",
+       "label": "Check list",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "string",
+          "required": true
+         }
+        ]
+       }
+      },
+      {
+       "slug": "audience_note",
+       "label": "Audience note",
+       "type": "text"
+      },
+      {
+       "slug": "audience_bold",
+       "label": "Bold phrase inside the audience note",
+       "type": "string"
+      },
+      {
+       "slug": "sim_default",
+       "label": "Simulator: starting discount %",
+       "type": "integer"
+      },
+      {
+       "slug": "sim_constrain_above",
+       "label": "Simulator: CONSTRAIN above %",
+       "type": "integer"
+      },
+      {
+       "slug": "sim_approval_above",
+       "label": "Simulator: REQUIRE APPROVAL above %",
+       "type": "integer"
+      },
+      {
+       "slug": "sim_block_above",
+       "label": "Simulator: BLOCK above %",
+       "type": "integer"
+      },
+      {
+       "slug": "sim_halt_at",
+       "label": "Simulator: HALT at or above %",
+       "type": "integer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_trust",
+   "label": "Trust strip",
+   "description": "Four short trust cards under the hero",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "items",
+       "label": "Cards",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "string"
+         },
+         {
+          "slug": "icon",
+          "label": "Icon name (package, shield-tick, file-check, cloud, lock, users…)",
+          "type": "string"
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_logos",
+   "label": "Design partner logos",
+   "description": "Logo row (placeholders until you add images)",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string"
+      },
+      {
+       "slug": "logos",
+       "label": "Logos",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "name",
+          "label": "Name",
+          "type": "string"
+         },
+         {
+          "slug": "image",
+          "label": "Logo image",
+          "type": "image"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "note",
+       "label": "Note under the logos",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_video",
+   "label": "Demo video",
+   "description": "Video with optional poster, duration and transcript link",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "video_url",
+       "label": "Video URL (mp4/webm file or an embed URL)",
+       "type": "url"
+      },
+      {
+       "slug": "duration",
+       "label": "Duration label (e.g. 2:00)",
+       "type": "string"
+      },
+      {
+       "slug": "caption",
+       "label": "Caption",
+       "type": "string"
+      },
+      {
+       "slug": "transcript_label",
+       "label": "Transcript link text",
+       "type": "string"
+      },
+      {
+       "slug": "transcript_url",
+       "label": "Transcript link",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_statement",
+   "label": "Statement band",
+   "description": "Dark full-width statement",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Text",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_steps",
+   "label": "How it works (steps)",
+   "description": "Connected flow of steps; mark one as the checkpoint",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "steps",
+       "label": "Steps",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "text"
+         },
+         {
+          "slug": "icon",
+          "label": "Icon name",
+          "type": "string"
+         },
+         {
+          "slug": "checkpoint",
+          "label": "This is the checkpoint step",
+          "type": "boolean"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "note_lead",
+       "label": "Fail-closed note: bold lead",
+       "type": "string"
+      },
+      {
+       "slug": "note_text",
+       "label": "Fail-closed note: text",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_verdicts",
+   "label": "Verdict ladder + example",
+   "description": "The five decisions and the policy code example",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "verdicts",
+       "label": "Verdicts (least to most control)",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "verdict",
+          "label": "Verdict (ALLOW, CONSTRAIN, REQUIRE APPROVAL, BLOCK, HALT)",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "description",
+          "label": "Description",
+          "type": "text"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "example_eyebrow",
+       "label": "Example eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "example_title",
+       "label": "Example title",
+       "type": "string"
+      },
+      {
+       "slug": "example_text",
+       "label": "Example intro",
+       "type": "text"
+      },
+      {
+       "slug": "example_steps",
+       "label": "Example steps",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "text",
+          "required": true
+         },
+         {
+          "slug": "bold",
+          "label": "Phrase to bold",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "code",
+       "label": "Policy code (one line per row)",
+       "type": "text"
+      },
+      {
+       "slug": "footnote_lead",
+       "label": "Footnote bold lead",
+       "type": "string"
+      },
+      {
+       "slug": "footnote_text",
+       "label": "Footnote text",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_demo",
+   "label": "Live demo carousel",
+   "description": "Four-step walkthrough shown as a carousel",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "slide1_tab",
+       "label": "Slide 1 tab label",
+       "type": "string"
+      },
+      {
+       "slug": "slide1_title",
+       "label": "Slide 1 title",
+       "type": "string"
+      },
+      {
+       "slug": "slide1_sub",
+       "label": "Slide 1 subtitle",
+       "type": "text"
+      },
+      {
+       "slug": "slide1_url",
+       "label": "Slide 1 address bar text",
+       "type": "string"
+      },
+      {
+       "slug": "rules",
+       "label": "Slide 1: rules",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "text",
+          "label": "Rule",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "verdict",
+          "label": "Verdict",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "slide1_caption",
+       "label": "Slide 1 caption",
+       "type": "text"
+      },
+      {
+       "slug": "slide1_caption_mono",
+       "label": "Slide 1: phrase shown in code style",
+       "type": "string"
+      },
+      {
+       "slug": "slide2_tab",
+       "label": "Slide 2 tab label",
+       "type": "string"
+      },
+      {
+       "slug": "slide2_title",
+       "label": "Slide 2 title",
+       "type": "string"
+      },
+      {
+       "slug": "slide2_sub",
+       "label": "Slide 2 subtitle",
+       "type": "text"
+      },
+      {
+       "slug": "slide2_url",
+       "label": "Slide 2 address bar text",
+       "type": "string"
+      },
+      {
+       "slug": "messages",
+       "label": "Slide 2: chat messages",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "from",
+          "label": "From (user or agent)",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "text",
+          "label": "Message",
+          "type": "text",
+          "required": true
+         },
+         {
+          "slug": "verdict",
+          "label": "Verdict (agent messages)",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "slide2_caption",
+       "label": "Slide 2 caption",
+       "type": "text"
+      },
+      {
+       "slug": "slide3_tab",
+       "label": "Slide 3 tab label",
+       "type": "string"
+      },
+      {
+       "slug": "slide3_title",
+       "label": "Slide 3 title",
+       "type": "string"
+      },
+      {
+       "slug": "slide3_sub",
+       "label": "Slide 3 subtitle",
+       "type": "text"
+      },
+      {
+       "slug": "slide3_url",
+       "label": "Slide 3 address bar text",
+       "type": "string"
+      },
+      {
+       "slug": "record",
+       "label": "Slide 3: record fields",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "label",
+          "label": "Label",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "value",
+          "label": "Value",
+          "type": "string"
+         },
+         {
+          "slug": "old_value",
+          "label": "Old value (struck through)",
+          "type": "string"
+         },
+         {
+          "slug": "highlight",
+          "label": "Highlight",
+          "type": "boolean"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "slide3_caption",
+       "label": "Slide 3 caption",
+       "type": "text"
+      },
+      {
+       "slug": "slide4_tab",
+       "label": "Slide 4 tab label",
+       "type": "string"
+      },
+      {
+       "slug": "slide4_title",
+       "label": "Slide 4 title",
+       "type": "string"
+      },
+      {
+       "slug": "slide4_sub",
+       "label": "Slide 4 subtitle",
+       "type": "text"
+      },
+      {
+       "slug": "slide4_url",
+       "label": "Slide 4 address bar text",
+       "type": "string"
+      },
+      {
+       "slug": "issues",
+       "label": "Slide 4: audit trail entries",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "meta",
+          "label": "Meta line",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "slide4_caption",
+       "label": "Slide 4 caption",
+       "type": "text"
+      },
+      {
+       "slug": "autoplay_note",
+       "label": "Autoplay note",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_proof",
+   "label": "Why it holds",
+   "description": "Guarantees, feature cards and closing callout",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "items",
+       "label": "Guarantees (title + one line)",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "text",
+          "label": "One line",
+          "type": "text"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "cards",
+       "label": "Feature cards",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "text"
+         },
+         {
+          "slug": "icon",
+          "label": "Icon name",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "closing_lead",
+       "label": "Closing callout: bold lead",
+       "type": "string"
+      },
+      {
+       "slug": "closing_text",
+       "label": "Closing callout: text",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_faq",
+   "label": "FAQ",
+   "description": "Questions and answers",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "items",
+       "label": "Questions",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "question",
+          "label": "Question",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "answer",
+          "label": "Answer",
+          "type": "text",
+          "required": true
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_repo",
+   "label": "Repo + README",
+   "description": "Dark band with the quickstart repo and a README preview",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "checks",
+       "label": "Check list",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "text",
+          "label": "Text",
+          "type": "string",
+          "required": true
+         }
+        ]
+       }
+      },
+      {
+       "slug": "github_label",
+       "label": "GitHub button text",
+       "type": "string"
+      },
+      {
+       "slug": "github_url",
+       "label": "GitHub URL",
+       "type": "url"
+      },
+      {
+       "slug": "docs_label",
+       "label": "Docs button text",
+       "type": "string"
+      },
+      {
+       "slug": "docs_url",
+       "label": "Docs URL",
+       "type": "url"
+      },
+      {
+       "slug": "clone_command",
+       "label": "Clone command",
+       "type": "string"
+      },
+      {
+       "slug": "readme_path",
+       "label": "README path (e.g. repo-name / README.md)",
+       "type": "string"
+      },
+      {
+       "slug": "stars",
+       "label": "Star count",
+       "type": "string"
+      },
+      {
+       "slug": "readme_tagline",
+       "label": "README tagline",
+       "type": "text"
+      },
+      {
+       "slug": "badges",
+       "label": "README badges",
+       "type": "repeater",
+       "validation": {
+        "subFields": [
+         {
+          "slug": "label",
+          "label": "Label",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "value",
+          "label": "Value",
+          "type": "string",
+          "required": true
+         },
+         {
+          "slug": "color",
+          "label": "Colour (green, blue, gray, navy)",
+          "type": "string"
+         }
+        ]
+       }
+      },
+      {
+       "slug": "readme_intro",
+       "label": "README intro",
+       "type": "text"
+      },
+      {
+       "slug": "readme_prereq",
+       "label": "README prerequisites (one per line)",
+       "type": "text"
+      },
+      {
+       "slug": "readme_quickstart",
+       "label": "README quickstart commands",
+       "type": "text"
+      },
+      {
+       "slug": "readme_after",
+       "label": "README paragraph after commands",
+       "type": "text"
+      },
+      {
+       "slug": "readme_inside",
+       "label": "README “What’s inside” (one per line)",
+       "type": "text"
+      },
+      {
+       "slug": "readme_why",
+       "label": "README “Why this exists” paragraph",
+       "type": "text"
+      },
+      {
+       "slug": "readme_link_label",
+       "label": "README link text",
+       "type": "string"
+      },
+      {
+       "slug": "readme_link_url",
+       "label": "README link",
+       "type": "url"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "agf_partner",
+   "label": "Design partner form",
+   "description": "Call to action with a short request form",
+   "category": "OpenBox for Agentforce",
+   "currentVersion": 1,
+   "versions": [
+    {
+     "version": 1,
+     "fields": [
+      {
+       "slug": "anchor_id",
+       "label": "Anchor ID (for nav links, e.g. how)",
+       "type": "string"
+      },
+      {
+       "slug": "eyebrow",
+       "label": "Eyebrow",
+       "type": "string"
+      },
+      {
+       "slug": "heading",
+       "label": "Heading",
+       "type": "string",
+       "required": true
+      },
+      {
+       "slug": "text",
+       "label": "Intro text",
+       "type": "text"
+      },
+      {
+       "slug": "email",
+       "label": "Request email address",
+       "type": "string"
+      },
+      {
+       "slug": "form_cta",
+       "label": "Form button text",
+       "type": "string"
+      },
+      {
+       "slug": "form_note",
+       "label": "Note under the form",
+       "type": "text"
+      },
+      {
+       "slug": "edition_options",
+       "label": "Salesforce edition options (one per line)",
+       "type": "text"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "collections": [
+  {
+   "slug": "pages",
+   "label": "Pages",
+   "labelSingular": "Page",
+   "urlPattern": "/{slug}",
+   "supports": [
+    "drafts",
+    "revisions",
+    "preview",
+    "seo"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Title",
+     "type": "string",
+     "required": true,
+     "searchable": true
+    },
+    {
+     "slug": "header_cta_label",
+     "label": "Header button text",
+     "type": "string"
+    },
+    {
+     "slug": "header_cta_url",
+     "label": "Header button link",
+     "type": "string"
+    },
+    {
+     "slug": "launchpad_label",
+     "label": "Salesforce Launchpad badge text",
+     "type": "string"
+    },
+    {
+     "slug": "footer_note",
+     "label": "Footer note",
+     "type": "text"
+    },
+    {
+     "slug": "content",
+     "label": "Page sections",
+     "type": "blocks",
+     "validation": {
+      "allowedTypes": [
+       "agf_hero",
+       "agf_trust",
+       "agf_logos",
+       "agf_video",
+       "agf_statement",
+       "agf_steps",
+       "agf_verdicts",
+       "agf_demo",
+       "agf_proof",
+       "agf_faq",
+       "agf_repo",
+       "agf_partner"
+      ],
+      "maxItems": 30
+     }
+    }
+   ]
+  }
+ ],
+ "menus": [
+  {
+   "name": "primary",
+   "label": "Primary Navigation",
+   "items": [
+    {
+     "type": "custom",
+     "label": "How it works",
+     "url": "#how"
+    },
+    {
+     "type": "custom",
+     "label": "Five decisions",
+     "url": "#decisions"
+    },
+    {
+     "type": "custom",
+     "label": "See it live",
+     "url": "#demo"
+    },
+    {
+     "type": "custom",
+     "label": "Why it holds",
+     "url": "#proof"
+    },
+    {
+     "type": "custom",
+     "label": "FAQ",
+     "url": "#faq"
+    },
+    {
+     "type": "custom",
+     "label": "Repo & docs",
+     "url": "#repo"
+    }
+   ]
+  },
+  {
+   "name": "footer",
+   "label": "Footer Links",
+   "items": [
+    {
+     "type": "custom",
+     "label": "How it works",
+     "url": "#how"
+    },
+    {
+     "type": "custom",
+     "label": "See it live",
+     "url": "#demo"
+    },
+    {
+     "type": "custom",
+     "label": "Repo & docs",
+     "url": "#repo"
+    },
+    {
+     "type": "custom",
+     "label": "FAQ",
+     "url": "#faq"
+    },
+    {
+     "type": "custom",
+     "label": "GitHub",
+     "url": "https://github.com/OpenBox-AI"
+    }
+   ]
+  },
+  {
+   "name": "legal",
+   "label": "Legal Links",
+   "items": [
+    {
+     "type": "custom",
+     "label": "Terms",
+     "url": "#"
+    },
+    {
+     "type": "custom",
+     "label": "Privacy",
+     "url": "#"
+    },
+    {
+     "type": "custom",
+     "label": "Cookies Policy",
+     "url": "#"
+    }
+   ]
+  }
+ ],
+ "content": {
+  "pages": [
+   {
+    "id": "home",
+    "slug": "home",
+    "status": "published",
+    "data": {
+     "title": "OpenBox for Agentforce",
+     "header_cta_label": "Become a design partner",
+     "header_cta_url": "#partner",
+     "launchpad_label": "Salesforce Launchpad member",
+     "footer_note": "OpenBox for Salesforce Agentforce. Mockup for design-partner outreach — product screens are illustrative.",
+     "content": [
+      {
+       "anchor_id": "top",
+       "badge": "OpenBox for Salesforce Agentforce",
+       "headline": "Agentforce agents that can’t be talked out of your rules.",
+       "highlight": "talked out of your rules.",
+       "lede": "OpenBox puts a security checkpoint in front of every message and every action an Agentforce agent takes. Salesforce writes nothing until OpenBox says yes — and nothing at all if OpenBox can’t be reached.",
+       "primary_cta_label": "Become a design partner",
+       "primary_cta_url": "#partner",
+       "secondary_cta_label": "See it work (2 min)",
+       "secondary_cta_url": "#watch",
+       "checks": [
+        {
+         "text": "Installs into your org"
+        },
+        {
+         "text": "Fails closed by default"
+        },
+        {
+         "text": "Every decision on the record"
+        }
+       ],
+       "audience_note": "Built for security, RevOps & Salesforce teams putting Agentforce into production — especially in regulated industries.",
+       "audience_bold": "security, RevOps & Salesforce teams",
+       "sim_default": 45,
+       "sim_constrain_above": 15,
+       "sim_approval_above": 25,
+       "sim_block_above": 40,
+       "sim_halt_at": 90,
+       "_type": "agf_hero",
+       "_version": 1,
+       "_key": "hero"
+      },
+      {
+       "items": [
+        {
+         "title": "Native package",
+         "text": "Installs into Salesforce. No middleware to host.",
+         "icon": "package"
+        },
+        {
+         "title": "Fails closed",
+         "text": "No answer means nothing is written. Ever.",
+         "icon": "shield-tick"
+        },
+        {
+         "title": "Tamper-proof trail",
+         "text": "Every decision becomes a record you can report on.",
+         "icon": "file-check"
+        },
+        {
+         "title": "Launchpad member",
+         "text": "Built on the Salesforce partner platform.",
+         "icon": "cloud"
+        }
+       ],
+       "_type": "agf_trust",
+       "_version": 1,
+       "_key": "trust"
+      },
+      {
+       "anchor_id": "watch",
+       "eyebrow": "Watch it in action",
+       "heading": "See OpenBox govern Agentforce in 2 minutes",
+       "text": "A short walkthrough: the agent proposes a change, OpenBox decides, and Salesforce writes only what’s allowed.",
+       "duration": "2:00",
+       "caption": "Captions available ·",
+       "transcript_label": "Read the transcript",
+       "transcript_url": "#",
+       "_type": "agf_video",
+       "_version": 1,
+       "_key": "video"
+      },
+      {
+       "heading": "Prompt instructions are not a security boundary.",
+       "text": "Tell an agent “never change a record without approval” and a clever user, a manipulated prompt or a confused model can still get it to. OpenBox moves the rule out of the prompt and into Salesforce code the agent cannot skip.",
+       "_type": "agf_statement",
+       "_version": 1,
+       "_key": "statement"
+      },
+      {
+       "anchor_id": "how",
+       "eyebrow": "How it works",
+       "heading": "A checkpoint between the agent and your data",
+       "text": "Salesforce calls OpenBox directly over HTTPS before anything is written. Four steps, every single request.",
+       "steps": [
+        {
+         "title": "User asks",
+         "text": "A person asks the agent to do something — raise a limit, update a record, run a flow.",
+         "icon": "user"
+        },
+        {
+         "title": "Agent proposes",
+         "text": "Agentforce reasons and proposes an action, reading the record as that user — so it sees only what they may see.",
+         "icon": "message"
+        },
+        {
+         "title": "OpenBox decides",
+         "text": "Every message and action is checked against your policy — the rule that lives in OpenBox, not in the prompt.",
+         "icon": "shield-tick",
+         "checkpoint": true
+        },
+        {
+         "title": "Salesforce writes",
+         "text": "Only what OpenBox allows is written — and Salesforce re-checks the user’s own access on top.",
+         "icon": "cloud"
+        }
+       ],
+       "note_lead": "No answer from OpenBox?",
+       "note_text": "Nothing is written. A timeout, a malformed reply or a failed identity check all fail closed.",
+       "_type": "agf_steps",
+       "_version": 1,
+       "_key": "steps"
+      },
+      {
+       "anchor_id": "decisions",
+       "eyebrow": "Every request gets one of five decisions",
+       "heading": "Five verdicts, every one explained",
+       "text": "OpenBox never just says no. Each outcome comes back with a reason the agent can pass to the user, and is logged for the audit trail.",
+       "verdicts": [
+        {
+         "verdict": "ALLOW",
+         "description": "Runs now, after Salesforce re-checks the user’s own access."
+        },
+        {
+         "verdict": "CONSTRAIN",
+         "description": "Runs, but inside limits. The action is capped to what your policy allows."
+        },
+        {
+         "verdict": "REQUIRE APPROVAL",
+         "description": "Waits for a person. Nothing changes until it’s approved."
+        },
+        {
+         "verdict": "BLOCK",
+         "description": "Doesn’t run. The agent is told why and can explain it to the user."
+        },
+        {
+         "verdict": "HALT",
+         "description": "Doesn’t run, and the conversation is ended."
+        }
+       ],
+       "example_eyebrow": "Illustrative example · a sales agent",
+       "example_title": "The rule lives in code, not in the prompt",
+       "example_text": "Drag the slider in the hero and this is the policy it runs against.",
+       "example_steps": [
+        {
+         "text": "A user asks the agent to put a 45% discount on an opportunity.",
+         "bold": "45% discount"
+        },
+        {
+         "text": "Salesforce reads the record as that user, so the agent sees only what they may see."
+        },
+        {
+         "text": "OpenBox checks the request against your policy. At 45% the rule blocks the write, so nothing changes.",
+         "bold": "blocks the write"
+        },
+        {
+         "text": "A smaller ask is handled too: 20% is capped to 15% (CONSTRAIN), 30% waits for approval. Every outcome is explained, and both sides keep the audit trail.",
+         "bold": "CONSTRAIN"
+        }
+       ],
+       "code": "# the rule lives in OpenBox, not in the prompt\naction opportunity.update_discount\n\n  if discount > 40%   → BLOCK\n  if discount > 25%   → REQUIRE_APPROVAL\n  if discount > 15%   → CONSTRAIN  # capped to 15%\n  else                → ALLOW",
+       "footnote_lead": "Discounts are only the demo.",
+       "footnote_text": "The same checkpoint covers any field on any object, and any flow, action or Apex class you route through it: credit limits, refunds, case priority, customer data.",
+       "_type": "agf_verdicts",
+       "_version": 1,
+       "_key": "verdicts"
+      },
+      {
+       "anchor_id": "demo",
+       "eyebrow": "See it live",
+       "heading": "Set the rules once. The agent tries. OpenBox decides.",
+       "text": "The four moments from the 2-minute walkthrough — a credit agent asked to raise a limit — with every decision ending up on the record.",
+       "slide1_tab": "Policy",
+       "slide1_title": "The policy",
+       "slide1_sub": "Set the rules once in OpenBox — versioned, with no Salesforce release",
+       "slide1_url": "openbox.node.ai/agents/credit-agent/policies",
+       "rules": [
+        {
+         "text": "Credit limit of $5M or more halts the credit agent",
+         "verdict": "HALT"
+        },
+        {
+         "text": "No credit increases for Cold-rated accounts",
+         "verdict": "BLOCK"
+        },
+        {
+         "text": "Credit limits above $1M are blocked for agents",
+         "verdict": "BLOCK"
+        },
+        {
+         "text": "Credit increases above $50K need credit-team approval",
+         "verdict": "REQUIRE APPROVAL"
+        }
+       ],
+       "slide1_caption": "Policies live in OpenBox and are versioned — commit 732130a. Editing a rule here takes effect on the next request, with no Salesforce release.",
+       "slide1_caption_mono": "commit 732130a",
+       "slide2_tab": "Agent",
+       "slide2_title": "The agent tries",
+       "slide2_sub": "The agent asks; OpenBox returns a verdict with a reason it can share",
+       "slide2_url": "openbox.node.ai/agents/credit-agent/conversations",
+       "messages": [
+        {
+         "from": "user",
+         "text": "Raise the credit limit on Northwind Retail to $6,000,000."
+        },
+        {
+         "from": "agent",
+         "verdict": "HALT",
+         "text": "I can’t do that. A credit limit of $5M or more is treated as abuse, so this session is ended for review."
+        },
+        {
+         "from": "user",
+         "text": "New session — set Northwind Retail’s credit limit to $350,000."
+        },
+        {
+         "from": "agent",
+         "verdict": "REQUIRE APPROVAL",
+         "text": "That’s above the $50K agent threshold, so I’ve sent it to the credit team. Nothing changes until a person approves it."
+        },
+        {
+         "from": "agent",
+         "verdict": "ALLOW",
+         "text": "Approved by the credit team. Northwind Retail’s credit limit is now $350,000."
+        }
+       ],
+       "slide2_caption": "The agent never argues its way past a rule. Each verdict comes back with a reason it can hand to the user.",
+       "slide3_tab": "Record",
+       "slide3_title": "The record updates",
+       "slide3_sub": "The approved change is written once, inside your org",
+       "slide3_url": "northwind.lightning.force.com/Account/Northwind-Retail",
+       "record": [
+        {
+         "label": "Account Name",
+         "value": "Northwind Retail"
+        },
+        {
+         "label": "Industry",
+         "value": "Retail"
+        },
+        {
+         "label": "Annual Revenue",
+         "value": "$12,000,000"
+        },
+        {
+         "label": "Account Rating",
+         "value": "Warm"
+        },
+        {
+         "label": "Credit Limit",
+         "value": "$350,000",
+         "old_value": "$275,000",
+         "highlight": true
+        },
+        {
+         "label": "Last Modified By",
+         "value": "OpenBox Sales Agent · 11/2/2026"
+        }
+       ],
+       "slide3_caption": "The approved change is written once, inside your org. No one had to go back and ask — the record shows exactly what changed and who changed it.",
+       "slide4_tab": "Audit",
+       "slide4_title": "The audit trail",
+       "slide4_sub": "Every decision logged as a Governed Request you can report on",
+       "slide4_url": "openbox.node.ai/agents/credit-agent/issues",
+       "issues": [
+        {
+         "title": "Blocked: a credit limit of $5M or more is treated as abuse; the agent session is halted",
+         "meta": "AccountCreditLimitUpdate · salesforce-conversation-00DAs…2176c4 · 14 hours ago"
+        },
+        {
+         "title": "Blocked: credit limits above $1M must be set by the credit committee, not an agent",
+         "meta": "AccountCreditLimitUpdate · salesforce-conversation-00DAs…0c3cde1 · 14 hours ago"
+        },
+        {
+         "title": "Blocked: accounts rated Cold cannot have their credit limit raised by an agent",
+         "meta": "AccountCreditLimitUpdate · salesforce-conversation-00DAs…5f8edb8 · 14 hours ago"
+        },
+        {
+         "title": "Blocked: credit limit increases above $50K require credit-team approval",
+         "meta": "AccountCreditLimitUpdate · salesforce-conversation-00DAs…22b9313 · 15 hours ago"
+        }
+       ],
+       "slide4_caption": "Every decision shows up in OpenBox, and every write becomes a Governed Request record inside Salesforce — report on it like any other object.",
+       "_type": "agf_demo",
+       "_version": 1,
+       "_key": "demo"
+      },
+      {
+       "anchor_id": "proof",
+       "eyebrow": "Why it holds",
+       "heading": "Built for security teams in regulated industries",
+       "text": "OpenBox adds runtime rules, approvals and tamper-proof evidence on top of the permissions and sharing your org already enforces. It never loosens them.",
+       "items": [
+        {
+         "title": "Both systems must agree",
+         "text": "Salesforce re-checks the user’s access on every write."
+        },
+        {
+         "title": "Fails closed",
+         "text": "No answer, a timeout or a bad reply means no write."
+        },
+        {
+         "title": "One path to protected fields",
+         "text": "Flows and API clients can’t bypass OpenBox."
+        },
+        {
+         "title": "No stale or repeated writes",
+         "text": "Changed records are refused; approvals run once."
+        },
+        {
+         "title": "Your data stays put",
+         "text": "OpenBox never calls into your org."
+        },
+        {
+         "title": "No secrets in code",
+         "text": "Keys stay in Salesforce credentials."
+        }
+       ],
+       "cards": [
+        {
+         "title": "Native to your org",
+         "text": "A package that installs into Salesforce. Nothing to host, and no middleware — Salesforce calls OpenBox directly over HTTPS.",
+         "icon": "package"
+        },
+        {
+         "title": "Covers what you already built",
+         "text": "Flows, standard actions and your own Apex run only after OpenBox says yes. Registering a flow takes no code.",
+         "icon": "layers"
+        },
+        {
+         "title": "Rules change without a release",
+         "text": "Policies, guardrails and approvers are edited in OpenBox, and the next request follows them.",
+         "icon": "sliders"
+        }
+       ],
+       "closing_lead": "It works with Salesforce, not around it.",
+       "closing_text": "OpenBox adds your runtime rules, approvals and tamper-proof evidence on top of the permissions and sharing your org already enforces. It never loosens them, and if OpenBox is ever unreachable the write simply does not happen.",
+       "_type": "agf_proof",
+       "_version": 1,
+       "_key": "proof"
+      },
+      {
+       "anchor_id": "faq",
+       "eyebrow": "Questions security teams ask",
+       "heading": "FAQ",
+       "items": [
+        {
+         "question": "Does OpenBox see our Salesforce data?",
+         "answer": "No. OpenBox never calls into your org. Salesforce sends only the specific facts a decision needs, and personal fields can be redacted before they leave."
+        },
+        {
+         "question": "What happens if OpenBox is unreachable?",
+         "answer": "The write doesn’t happen. A timeout, a malformed reply or a failed identity check all fail closed — nothing is written until OpenBox returns a valid decision."
+        },
+        {
+         "question": "Is this middleware we have to host?",
+         "answer": "No. It’s an unlocked package that installs into your org. Salesforce calls OpenBox directly over HTTPS; there’s nothing for you to run or maintain."
+        },
+        {
+         "question": "Does it replace Salesforce permissions?",
+         "answer": "It adds to them. An OpenBox “yes” still has to pass the user’s own object, field and record access in Salesforce. OpenBox never loosens what your org already enforces."
+        },
+        {
+         "question": "Do we need to rebuild our flows and Apex?",
+         "answer": "No. Flows, standard actions and your own Apex run only after OpenBox says yes. Registering a flow takes no code."
+        },
+        {
+         "question": "How do we change a rule?",
+         "answer": "Policies, guardrails and approvers are edited in OpenBox and versioned. The next request follows the new rule — no Salesforce release required."
+        }
+       ],
+       "_type": "agf_faq",
+       "_version": 1,
+       "_key": "faq"
+      },
+      {
+       "anchor_id": "repo",
+       "eyebrow": "Run it yourself",
+       "heading": "One high-risk action, governed in your own sandbox",
+       "text": "Clone the quickstart, install the package, and put one Agentforce action behind OpenBox — the credit-limit example from the demo, ready to run. The README walks you through it in about 15 minutes.",
+       "checks": [
+        {
+         "text": "Unlocked package — installs into a scratch org or sandbox"
+        },
+        {
+         "text": "Sample policy, agent action and the Governed Request object, preconfigured"
+        },
+        {
+         "text": "Copy-paste setup, a labelled architecture diagram, and a troubleshooting section"
+        }
+       ],
+       "github_label": "View the repo on GitHub",
+       "github_url": "https://github.com/OpenBox-AI",
+       "docs_label": "Read the docs",
+       "docs_url": "https://docs.openbox.ai",
+       "clone_command": "git clone github.com/OpenBox-AI/agentforce-governance-quickstart",
+       "readme_path": "agentforce-governance-quickstart / README.md",
+       "stars": "128",
+       "readme_tagline": "Put one high-risk Agentforce action behind a policy checkpoint — in a sandbox, in about 15 minutes.",
+       "badges": [
+        {
+         "label": "build",
+         "value": "passing",
+         "color": "green"
+        },
+        {
+         "label": "package",
+         "value": "unlocked",
+         "color": "blue"
+        },
+        {
+         "label": "license",
+         "value": "Apache-2.0",
+         "color": "gray"
+        },
+        {
+         "label": "Salesforce",
+         "value": "Launchpad",
+         "color": "navy"
+        }
+       ],
+       "readme_intro": "Agentforce can write to Salesforce. This quickstart shows what it looks like when OpenBox checks every action first — using the credit-limit example from the demo.",
+       "readme_prereq": "A Salesforce scratch org or sandbox (Agentforce enabled)\nSalesforce CLI (sf) and an OpenBox API key (free tier works)",
+       "readme_quickstart": "# 1 · clone & authorise your sandbox\ngit clone github.com/OpenBox-AI/agentforce-governance-quickstart\ncd agentforce-governance-quickstart\nsf org login web --alias obx-demo\n\n# 2 · install the unlocked package\nsf package install --package OpenBoxGov@latest -o obx-demo\n\n# 3 · load the sample policy & agent action\nsf project deploy start -o obx-demo",
+       "readme_after": "Then open Agentforce Studio, ask the credit agent to raise a limit, and watch OpenBox allow, constrain, require approval, block, or halt.",
+       "readme_inside": "sample-policy/ — the five credit rules, versioned and commented\nforce-app/ — the guarded agent action & the Governed Request object\ndocs/architecture.md — a labelled diagram of the request path\ndocs/troubleshooting.md — fails-closed behaviour & common fixes",
+       "readme_link_label": "Read the full README on GitHub",
+       "readme_link_url": "https://github.com/OpenBox-AI",
+       "_type": "agf_repo",
+       "_version": 1,
+       "_key": "repo",
+       "readme_why": "Prompt instructions aren’t a security boundary. OpenBox moves the rule into Salesforce code the agent can’t skip, so a governed action is safe to ship — starting with the one you’d least want it to get wrong."
+      },
+      {
+       "anchor_id": "partner",
+       "eyebrow": "Become a design partner",
+       "heading": "Put one high-risk action behind OpenBox — then widen from there",
+       "text": "We’re working with a small group of Salesforce teams, especially in regulated industries, to govern their first Agentforce action in their own sandbox. Bring the one you’d least want an agent to get wrong.",
+       "email": "tahir@openbox.ai",
+       "form_cta": "Request a design-partner spot",
+       "form_note": "Prefer email? tahir@openbox.ai · We reply within two working days.",
+       "edition_options": "Enterprise\nUnlimited\nPerformance\nDeveloper / sandbox\nNot sure yet",
+       "_type": "agf_partner",
+       "_version": 1,
+       "_key": "partner"
+      }
+     ]
+    }
+   }
+  ]
+ }
+}

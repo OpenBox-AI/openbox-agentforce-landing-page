@@ -1,0 +1,13 @@
+---
+import Icon from "../Icon.astro";
+const { value: v } = Astro.props;
+const items = v.items ?? [];
+---
+
+<section class="band" style="padding-block: 4px 32px" id={v.anchor_id || undefined}>
+	<div class="wrap cards4">
+		{items.map((i: any) => (
+			<div class="trust"><Icon name={i.icon || "shield-tick"} /><div><h3>{i.title}</h3><p>{i.text}</p></div></div>
+		))}
+	</div>
+</section>

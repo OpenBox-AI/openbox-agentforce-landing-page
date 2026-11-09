@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+	verdict: string; // ALLOW | CONSTRAIN | REQUIRE APPROVAL | BLOCK | HALT
+	small?: boolean;
+}
+const { verdict, small } = Astro.props;
+const key = verdict.toUpperCase().trim();
+const cls = key.replace(/\s+/g, "-");
+const ICON: Record<string, string> = {
+	ALLOW: "check",
+	CONSTRAIN: "constrain",
+	"REQUIRE APPROVAL": "clock",
+	BLOCK: "ban",
+	HALT: "halt",
+};
+const label = key;
+---
+
+<span class:list={["chip", `chip--${cls}`, { "chip--sm": small }]}>
+	{!small && <Icon name={ICON[key] ?? "check"} />}{label}
+</span>

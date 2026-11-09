@@ -1,0 +1,11 @@
+---
+import Icon from "../Icon.astro";
+const { value: v } = Astro.props;
+---
+
+<section class="statement" id={v.anchor_id || undefined}>
+	<div class="wrap statement__in">
+		<div class="statement__h"><Icon name="alert" /><h2>{v.heading}</h2></div>
+		<p>{v.text}</p>
+	</div>
+</section>

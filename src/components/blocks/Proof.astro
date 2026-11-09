@@ -1,0 +1,29 @@
+---
+import Icon from "../Icon.astro";
+const { value: v } = Astro.props;
+const items = v.items ?? [];
+const cards = v.cards ?? [];
+---
+
+<section class="band band--alt" id={v.anchor_id || undefined}>
+	<div class="wrap">
+		<div class="head">
+			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}
+			<h2 class="h2">{v.heading}</h2>
+			{v.text && <p class="lead">{v.text}</p>}
+		</div>
+		<ul class="proof">
+			{items.map((i: any) => <li><Icon name="check" /><div><h3>{i.title}</h3><p>{i.text}</p></div></li>)}
+		</ul>
+		{cards.length > 0 && (
+			<div class="cards3">
+				{cards.map((c: any) => (
+					<div class="fcard"><span class="fcard__ic"><Icon name={c.icon || "package"} /></span><h3>{c.title}</h3><p>{c.text}</p></div>
+				))}
+			</div>
+		)}
+		{(v.closing_lead || v.closing_text) && (
+			<div class="closing"><Icon name="shield-tick" /><p><strong>{v.closing_lead}</strong> {v.closing_text}</p></div>
+		)}
+	</div>
+</section>
