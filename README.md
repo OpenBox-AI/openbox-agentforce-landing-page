@@ -58,7 +58,8 @@ Design source: Figma file “OpenBox for Agentforce — Landing Page”.
    ```
 3. Set `EMDASH_SITE_URL` to the production origin **before** first setup (passkeys are bound to it).
 4. Connect the repo in Cloudflare (Workers Builds): build command `npm run build`, deploy command `npx wrangler deploy`.
-   The D1 database (`DB`), R2 bucket (`MEDIA`) and session KV are created on the first deploy.
+   The D1 database (`DB`) and session KV are created on the first deploy. The R2 bucket (`MEDIA`) is **not** —
+   create `openbox-agentforce-media` in the same Cloudflare account first (R2 → Create bucket), otherwise the deploy fails with `R2 bucket not found [code: 10085]`.
 5. Open `/_emdash/admin`, register a passkey, and **tick “Include sample content”** in the setup wizard —
    the schema applies automatically, the home page content only loads if you choose it.
 6. New sites start in staging (hidden from search engines) until taken live in the admin.
