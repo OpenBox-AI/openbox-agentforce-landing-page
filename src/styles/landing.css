@@ -502,7 +502,6 @@ details.q p { font-size: 14px; color: var(--ink-3); padding: 0 0 18px; }
 .theme-toggle .i-moon { display: none; }
 :root[data-theme="dark"] .theme-toggle .i-sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .i-moon { display: inline; }
-.drawer__row { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding-inline: 20px; font: 500 18px/1.4 var(--sans); border-bottom: 1px solid var(--line-soft); }
 
 /* ---------- Dark theme ----------
    Values come from the Openbox DS "1. Color modes → Dark mode" collection. The attribute is set before first paint
