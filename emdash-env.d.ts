@@ -204,6 +204,7 @@ export interface PageContentAgfRepoV1Block {
   "readme_quickstart"?: string | null;
   "readme_after"?: string | null;
   "readme_inside"?: string | null;
+  "readme_why"?: string | null;
   "readme_link_label"?: string | null;
   "readme_link_url"?: string | null;
 }
