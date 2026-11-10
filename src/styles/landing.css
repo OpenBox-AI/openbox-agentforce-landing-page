@@ -65,10 +65,11 @@ svg.icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor
 	background-image: var(--mosaic, none), var(--glow-a, none), var(--glow-b, none);
 	background-position: var(--mosaic-pos, right top), 0 0, 0 0;
 	background-size: min(324px, 34vw) auto, 100% 100%, 100% 100%;
+	opacity: 0.6; /* keeps glows and the mosaic quiet */
 }
 .band--grid::before {
 	content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-	background-image: linear-gradient(rgba(0, 140, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 140, 255, 0.07) 1px, transparent 1px);
+	background-image: linear-gradient(rgba(0, 140, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 140, 255, 0.045) 1px, transparent 1px);
 	background-size: 80px 80px;
 	-webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
 	mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
@@ -77,7 +78,7 @@ svg.icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor
 .band--glow-l { --glow-b: radial-gradient(ellipse 34% 50% at 8% 50%, rgba(0, 140, 255, 0.11), rgba(0, 140, 255, 0)); }
 .band--mosaic-tr { --mosaic: url("/bg/mosaic-tr.svg"); --mosaic-pos: right top; }
 .band--mosaic-tl { --mosaic: url("/bg/mosaic-tl.svg"); --mosaic-pos: left top; }
-@media (max-width: 640px) { .band::after { opacity: 0.7; } }
+@media (max-width: 640px) { .band::after { opacity: 0.45; } }
 .mono { font-family: var(--mono); }
 .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-700); }
 h1, h2, h3 { font-family: var(--mono); letter-spacing: -0.015em; }
@@ -219,7 +220,7 @@ h1, h2, h3 { font-family: var(--mono); letter-spacing: -0.015em; }
 
 /* Statement */
 .statement { background: var(--brand-section); color: #fff; padding-block: 36px; }
-.statement::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px), radial-gradient(ellipse 45% 120% at 88% 50%, rgba(0, 140, 255, 0.28), rgba(0, 140, 255, 0)); background-size: 80px 80px, 80px 80px, 100% 100%; }
+.statement::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px), radial-gradient(ellipse 45% 120% at 88% 50%, rgba(0, 140, 255, 0.16), rgba(0, 140, 255, 0)); background-size: 80px 80px, 80px 80px, 100% 100%; }
 @media (min-width: 1100px) { .statement { padding-block: 44px; } }
 .statement__in { display: grid; gap: 12px; align-items: center; }
 @media (min-width: 1100px) { .statement__in { grid-template-columns: 480px 1fr; gap: 56px; } }
@@ -445,7 +446,7 @@ details.q p { font-size: 14px; color: var(--ink-3); padding: 0 0 18px; }
 .form__ok { font-size: 14px; color: var(--teal-700); font-weight: 600; }
 
 /* Footer */
-.foot { border-top: 1px solid var(--line); padding-block: 34px 42px; margin-top: 16px; }
+.foot { background: var(--bg); padding-block: 48px 42px; }
 .foot__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .foot__logo { display: inline-flex; color: var(--ink-2); height: 22px; }
 .foot__logo svg { height: 100%; width: auto; }
