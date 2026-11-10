@@ -1636,11 +1636,11 @@
         }
        ],
        "github_label": "View the repo on GitHub",
-       "github_url": "https://github.com/OpenBox-AI",
+       "github_url": "https://github.com/OpenBox-AI/openbox-agentforce-sdk",
        "docs_label": "Read the docs",
        "docs_url": "https://docs.openbox.ai",
-       "clone_command": "git clone github.com/OpenBox-AI/agentforce-governance-quickstart",
-       "readme_path": "agentforce-governance-quickstart / README.md",
+       "clone_command": "git clone https://github.com/OpenBox-AI/openbox-agentforce-sdk.git",
+       "readme_path": "openbox-agentforce-sdk / README.md",
        "stars": "128",
        "readme_tagline": "Put one high-risk Agentforce action behind a policy checkpoint — in a sandbox, in about 15 minutes.",
        "badges": [
@@ -1667,7 +1667,7 @@
        ],
        "readme_intro": "Agentforce can write to Salesforce. This quickstart shows what it looks like when OpenBox checks every action first — using the credit-limit example from the demo.",
        "readme_prereq": "A Salesforce scratch org or sandbox (Agentforce enabled)\nSalesforce CLI (sf) and an OpenBox API key (free tier works)",
-       "readme_quickstart": "# 1 · clone & authorise your sandbox\ngit clone github.com/OpenBox-AI/agentforce-governance-quickstart\ncd agentforce-governance-quickstart\nsf org login web --alias obx-demo\n\n# 2 · install the unlocked package\nsf package install --package OpenBoxGov@latest -o obx-demo\n\n# 3 · load the sample policy & agent action\nsf project deploy start -o obx-demo",
+       "readme_quickstart": "# 1 · clone & authorise your sandbox\ngit clone https://github.com/OpenBox-AI/openbox-agentforce-sdk.git\ncd openbox-agentforce-sdk\nsf org login web --alias obx-demo\n\n# 2 · install the unlocked package\nsf package install --package OpenBoxGov@latest -o obx-demo\n\n# 3 · load the sample policy & agent action\nsf project deploy start -o obx-demo",
        "readme_after": "Then open Agentforce Studio, ask the credit agent to raise a limit, and watch OpenBox allow, constrain, require approval, block, or halt.",
        "readme_inside": "sample-policy/ — the five credit rules, versioned and commented\nforce-app/ — the guarded agent action & the Governed Request object\ndocs/architecture.md — a labelled diagram of the request path\ndocs/troubleshooting.md — fails-closed behaviour & common fixes",
        "readme_link_label": "Read the full README on GitHub",
