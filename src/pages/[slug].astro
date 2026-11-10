@@ -7,6 +7,8 @@ import { resolveStarterSiteIdentity } from "../utils/site-identity";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug) return Astro.rewrite("/404");
+// The home entry is served at "/" (see index.astro). Send /home there so the page has a single URL.
+if (slug === "home") return Astro.redirect("/", 301);
 
 const { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
 if (!page) return Astro.rewrite("/404");

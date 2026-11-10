@@ -50,7 +50,8 @@ const pageCtx = createPublicPageContext({
 	pageTitle: pageTitle ?? title,
 	description: pageDescription,
 	canonical,
-	image,
+	// Pages can pass their own image; the entry's SEO-panel "OG Image" still wins over this. Falls back to the branded share card.
+	image: image ?? new URL("/og-image.png", Astro.url.origin).href,
 	content,
 	siteName: siteTitle,
 });
