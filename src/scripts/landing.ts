@@ -116,6 +116,8 @@ if (demo) {
 	const ms = Number(demo.dataset.autoplayMs ?? 5000);
 	let i = 0;
 	let playing = !reduceMotion;
+	// Autoplay only runs while the carousel is on screen (see the IntersectionObserver at the end of this block).
+	let inView = typeof IntersectionObserver === "undefined";
 	let timer: number | undefined;
 	let startedAt = 0;
 	const pad = (x: number) => String(x).padStart(2, "0");
@@ -125,7 +127,7 @@ if (demo) {
 		bar.style.transition = "none";
 		bar.style.width = "0%";
 		void bar.offsetWidth;
-		if (playing) { bar.style.transition = `width ${ms}ms linear`; bar.style.width = "100%"; }
+		if (playing && inView) { bar.style.transition = `width ${ms}ms linear`; bar.style.width = "100%"; }
 	};
 	const setPlayIcon = () => {
 		play.querySelector("svg")!.innerHTML = playing ? PAUSE : PLAY;
@@ -142,7 +144,7 @@ if (demo) {
 		restartBar();
 	};
 	const stopTimer = () => { if (timer) window.clearInterval(timer); timer = undefined; };
-	const startTimer = () => { stopTimer(); if (!playing) return; startedAt = Date.now(); timer = window.setInterval(() => go(i + 1), ms); restartBar(); };
+	const startTimer = () => { stopTimer(); if (!playing || !inView) return; startedAt = Date.now(); timer = window.setInterval(() => go(i + 1), ms); restartBar(); };
 	const pause = () => { stopTimer(); playing = false; setPlayIcon(); bar.style.transition = "none"; };
 	demo.querySelector("[data-demo-prev]")!.addEventListener("click", () => { go(i - 1); startTimer(); });
 	demo.querySelector("[data-demo-next]")!.addEventListener("click", () => { go(i + 1); startTimer(); });
@@ -157,7 +159,17 @@ if (demo) {
 	demo.addEventListener("focusout", () => { if (!demo.contains(document.activeElement)) release(); });
 	setPlayIcon();
 	go(0);
-	if (playing) startTimer();
+	// Start autoplay when the carousel scrolls into view and pause it (and reset the progress bar) when it leaves.
+	if (typeof IntersectionObserver !== "undefined") {
+		new IntersectionObserver(
+			(entries) => {
+				inView = entries[0].isIntersecting;
+				if (inView) startTimer();
+				else { stopTimer(); bar.style.transition = "none"; bar.style.width = "0%"; }
+			},
+			{ threshold: 0.25 },
+		).observe(demo);
+	} else if (playing) startTimer();
 }
 
 /* ---------- Copy buttons ---------- */
