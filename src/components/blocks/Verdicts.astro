@@ -17,7 +17,7 @@ const codeHtml = (v.code ?? "").split("\n").map(highlight).join("\n");
 const steps = v.example_steps ?? [];
 ---
 
-<section class="band band--alt" id={v.anchor_id || undefined}>
+<section class="band band--alt band--glow-l" id={v.anchor_id || undefined}>
 	<div class="wrap">
 		<div class="head">
 			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}

@@ -7,7 +7,7 @@ const isFile = !!url && /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
 const transcript = v.transcript_url ? sanitizeHref(v.transcript_url) : undefined;
 ---
 
-<section class="band" style="padding-block: 6px 40px" id={v.anchor_id || undefined}>
+<section class="band band--alt band--grid band--glow-r" id={v.anchor_id || undefined}>
 	<div class="wrap video">
 		<div class="head head--center" style="margin-bottom:0">
 			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}

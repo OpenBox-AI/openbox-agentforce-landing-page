@@ -55,6 +55,29 @@ svg.icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor
 @media (min-width: 768px) { .band { padding-block: 48px; } }
 @media (min-width: 1100px) { .band { padding-block: 58px; } }
 .band--alt { background: var(--bg-2); }
+
+/* Section backgrounds — same approach as openbox.ai: bands alternate white / #f6f8fc, with a faint
+   brand-blue grid, soft radial glows and a pixel mosaic fading out from a corner. Opt in per section
+   with the modifier classes below. Decorations sit behind content (z-index -1 inside an isolated band). */
+.band, .statement { position: relative; isolation: isolate; }
+.band::after {
+	content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-repeat: no-repeat;
+	background-image: var(--mosaic, none), var(--glow-a, none), var(--glow-b, none);
+	background-position: var(--mosaic-pos, right top), 0 0, 0 0;
+	background-size: min(324px, 34vw) auto, 100% 100%, 100% 100%;
+}
+.band--grid::before {
+	content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+	background-image: linear-gradient(rgba(0, 140, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 140, 255, 0.07) 1px, transparent 1px);
+	background-size: 80px 80px;
+	-webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+	mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+.band--glow-r { --glow-a: radial-gradient(ellipse 38% 50% at 90% 50%, rgba(0, 140, 255, 0.14), rgba(0, 140, 255, 0)); }
+.band--glow-l { --glow-b: radial-gradient(ellipse 34% 50% at 8% 50%, rgba(0, 140, 255, 0.11), rgba(0, 140, 255, 0)); }
+.band--mosaic-tr { --mosaic: url("/bg/mosaic-tr.svg"); --mosaic-pos: right top; }
+.band--mosaic-tl { --mosaic: url("/bg/mosaic-tl.svg"); --mosaic-pos: left top; }
+@media (max-width: 640px) { .band::after { opacity: 0.7; } }
 .mono { font-family: var(--mono); }
 .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-700); }
 h1, h2, h3 { font-family: var(--mono); letter-spacing: -0.015em; }
@@ -194,6 +217,7 @@ h1, h2, h3 { font-family: var(--mono); letter-spacing: -0.015em; }
 
 /* Statement */
 .statement { background: var(--brand-section); color: #fff; padding-block: 36px; }
+.statement::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px), radial-gradient(ellipse 45% 120% at 88% 50%, rgba(0, 140, 255, 0.28), rgba(0, 140, 255, 0)); background-size: 80px 80px, 80px 80px, 100% 100%; }
 @media (min-width: 1100px) { .statement { padding-block: 44px; } }
 .statement__in { display: grid; gap: 12px; align-items: center; }
 @media (min-width: 1100px) { .statement__in { grid-template-columns: 480px 1fr; gap: 56px; } }

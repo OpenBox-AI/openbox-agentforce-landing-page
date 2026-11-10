@@ -4,7 +4,7 @@ const { value: v } = Astro.props;
 const items = v.items ?? [];
 ---
 
-<section class="band" id={v.anchor_id || undefined}>
+<section class="band band--grid" id={v.anchor_id || undefined}>
 	<div class="wrap">
 		<div class="head">
 			{v.eyebrow && <span class="eyebrow">{v.eyebrow}</span>}

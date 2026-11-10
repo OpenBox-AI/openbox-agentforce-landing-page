@@ -4,7 +4,7 @@ const { value: v } = Astro.props;
 const editions = (v.edition_options ?? "").split("\n").map((x: string) => x.trim()).filter(Boolean);
 ---
 
-<section class="band" style="padding-top: 8px" id={v.anchor_id || undefined}>
+<section class="band band--alt band--mosaic-tr band--glow-l" id={v.anchor_id || undefined}>
 	<div class="wrap">
 		<div class="partner">
 			<div class="partner__copy">
