@@ -188,3 +188,31 @@ if (form) {
 		form.querySelector<HTMLElement>("[data-form-ok]")?.removeAttribute("hidden");
 	});
 }
+
+/* ---------- Theme toggle ----------
+   The initial theme is set before first paint by an inline script in Base.astro (saved choice, else system setting).
+   This wires the toggle buttons, saves the choice, and follows the system setting until the visitor picks one. */
+const root = document.documentElement;
+const themeButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]"));
+const currentTheme = () => (root.getAttribute("data-theme") === "dark" ? "dark" : "light");
+const syncThemeButtons = () => {
+	const next = currentTheme() === "dark" ? "light" : "dark";
+	themeButtons.forEach((b) => {
+		b.setAttribute("aria-label", `Switch to ${next} mode`);
+		b.setAttribute("title", `Switch to ${next} mode`);
+	});
+};
+const applyTheme = (theme: "light" | "dark", persist: boolean) => {
+	root.setAttribute("data-theme", theme);
+	if (persist) {
+		try { localStorage.setItem("obx-theme", theme); } catch { /* storage blocked — the choice just won't persist */ }
+	}
+	syncThemeButtons();
+};
+themeButtons.forEach((b) => b.addEventListener("click", () => applyTheme(currentTheme() === "dark" ? "light" : "dark", true)));
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", (e) => {
+	let saved: string | null = null;
+	try { saved = localStorage.getItem("obx-theme"); } catch { /* ignore */ }
+	if (!saved) applyTheme(e.matches ? "dark" : "light", false);
+});
+syncThemeButtons();

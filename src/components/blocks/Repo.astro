@@ -4,7 +4,9 @@ import Icon from "../Icon.astro";
 import Logo from "../Logo.astro";
 const { value: v } = Astro.props;
 const lines = (s?: string) => (s ?? "").split("\n").map((x) => x.trim()).filter(Boolean);
-const COLORS: Record<string, string> = { green: "#0f766e", blue: "#0070cc", gray: "#375582", navy: "#003866" };
+// README badge colours are theme tokens (--bdg-<name> / --bdg-<name>-fg in landing.css) so they flip in dark mode.
+const BADGE_COLORS = ["green", "blue", "gray", "navy"];
+const badgeKey = (c: string) => (BADGE_COLORS.includes(c) ? c : "blue");
 const gh = v.github_url ? sanitizeHref(v.github_url) : "#";
 const docs = v.docs_url ? sanitizeHref(v.docs_url) : "#";
 const readmeLink = v.readme_link_url ? sanitizeHref(v.readme_link_url) : gh;
@@ -47,7 +49,7 @@ const code = (v.readme_quickstart ?? "")
 				<div class="readme__body" tabindex="0" role="region" aria-label="README preview (scrollable)">
 					<span class="oblogo"><Logo /></span>
 					<p>{v.readme_tagline}</p>
-					<div class="badges">{(v.badges ?? []).map((b: any) => <span class="bdg" style={`--c:${COLORS[b.color] ?? COLORS.blue}`}><i>{b.label}</i><b>{b.value}</b></span>)}</div>
+					<div class="badges">{(v.badges ?? []).map((b: any) => <span class="bdg" style={`--c:var(--bdg-${badgeKey(b.color)});--cf:var(--bdg-${badgeKey(b.color)}-fg)`}><i>{b.label}</i><b>{b.value}</b></span>)}</div>
 					<p>{v.readme_intro}</p>
 					{v.readme_prereq && <><h3>Prerequisites</h3><ul>{lines(v.readme_prereq).map((l) => <li>{l}</li>)}</ul></>}
 					{v.readme_quickstart && <><h3>Quickstart</h3><pre class="rcode" set:html={code}></pre></>}

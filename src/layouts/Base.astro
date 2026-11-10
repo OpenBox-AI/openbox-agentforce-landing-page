@@ -61,7 +61,18 @@ const pageCtx = createPublicPageContext({
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="light dark" />
 		<title>{fullTitle}</title>
+		<!-- Set the theme before first paint (saved choice, else the system setting) to avoid a light flash. -->
+		<script is:inline>
+			(function () {
+				try {
+					var saved = localStorage.getItem("obx-theme");
+					var theme = saved === "light" || saved === "dark" ? saved : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+					document.documentElement.setAttribute("data-theme", theme);
+				} catch (e) {}
+			})();
+		</script>
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
 		<link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />

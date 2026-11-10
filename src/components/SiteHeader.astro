@@ -27,6 +27,7 @@ const cta = ctaLabel && ctaUrl ? { label: ctaLabel, url: sanitizeHref(ctaUrl) } 
 		</nav>
 		<div class="nav__right">
 			{launchpad && <span class="pill"><Icon name="cloud" />{launchpad}</span>}
+			<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme"><Icon name="sun" class="i-sun" /><Icon name="moon" class="i-moon" /></button>
 			{cta && <a class="btn btn--primary nav__cta" href={cta.url}>{cta.label}<Icon name="arrow-right" /></a>}
 			<button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-menu-btn>
 				<Icon name="menu" class="menu-open" /><Icon name="x" class="menu-close" />
@@ -36,6 +37,7 @@ const cta = ctaLabel && ctaUrl ? { label: ctaLabel, url: sanitizeHref(ctaUrl) } 
 	<div class="drawer" id="drawer" data-drawer>
 		<nav aria-label="Mobile">
 			{items.map((i) => <a class="drawer__link" href={i.url}>{i.label}</a>)}
+			<div class="drawer__row"><span>Theme</span><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme"><Icon name="sun" class="i-sun" /><Icon name="moon" class="i-moon" /></button></div>
 		</nav>
 		<div class="drawer__foot">
 			{launchpad && <span class="pill"><Icon name="cloud" />{launchpad}</span>}
